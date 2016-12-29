@@ -39,6 +39,7 @@ const SETTINGS_IGNORE_PANEL = 'ignore-panel';
 const SETTINGS_WINDOW_MARGIN = 'window-margin';
 const SETTINGS_INSETS_PRIMARY = 'insets-primary';
 const SETTINGS_INSETS_SECONDARY = 'insets-secondary';
+const WINDOW_SPACING = 6;
 
 let status;
 let launcher;
@@ -112,14 +113,14 @@ const GTileStatusButton = new Lang.Class({
 function initSettings() {
     //Here is where you add new grid size button
     gridSettings[SETTINGS_GRID_SIZE] = [
-        new GridSettingsButton('4x4',4,4),
+        // new GridSettingsButton('4x4',4,4),
         new GridSettingsButton('6x4',6,4),
-        new GridSettingsButton('8x6',8,6),
+        // new GridSettingsButton('8x6',8,6),
     ];
 
     //You can change those settings to set whatever you want by default
     gridSettings[SETTINGS_AUTO_CLOSE] = true;
-    gridSettings[SETTINGS_ANIMATION] = true;
+    gridSettings[SETTINGS_ANIMATION] = false;
     gridSettings[SETTINGS_IGNORE_PANEL] = false; //Set this to true if you have the top panel hidden
     gridSettings[SETTINGS_WINDOW_MARGIN] = 0; // small margin offset
     gridSettings[SETTINGS_INSETS_PRIMARY] = { top: 0, bottom: 0, left: 0, right: 0 }; // Insets on primary monitor
@@ -348,11 +349,11 @@ function move_resize_window(metaWindow, x, y, width, height) {
 
     global.log(metaWindow.get_title()+" "+borderY);
 
-    x = x  ;//+ (vBorderX - 1);
-    y = y  ;
+    x = x + WINDOW_SPACING;//+ (vBorderX - 1);
+    y = y + WINDOW_SPACING;
 
-    width = width - vBorderX;
-    height = height - vBorderY ;
+    width = width - vBorderX - (WINDOW_SPACING * 2);
+    height = height - vBorderY - (WINDOW_SPACING * 2);
 
     /* To TEST
     win._overviewHint = {
@@ -362,6 +363,7 @@ function move_resize_window(metaWindow, x, y, width, height) {
     };
     */
 
+    global.log("MOVING TO", x,y,width,height)
     metaWindow.move_resize_frame(true,x,y,width,height);
 
     /*
@@ -924,62 +926,62 @@ Grid.prototype = {
 
         this.topbar = new TopBar(title);
 
-        this.bottombarContainer = new St.Bin({ style_class: 'bottom-box-container',
-            reactive:true,
-            can_focus:true,
-            track_hover:true
-        });
+        // this.bottombarContainer = new St.Bin({ style_class: 'bottom-box-container',
+        //     reactive:true,
+        //     can_focus:true,
+        //     track_hover:true
+        // });
 
-        this.bottombar = new St.Widget({
-            style_class: 'bottom-box',
-            can_focus: true,
-            track_hover: true,
-            reactive: true,
-            width:this.tableWidth-20,
-            height:36,
-            layout_manager: new Clutter.TableLayout()
-        });
-        this.bottombar_table_layout = this.bottombar.layout_manager;
+        // this.bottombar = new St.Widget({
+        //     style_class: 'bottom-box',
+        //     can_focus: true,
+        //     track_hover: true,
+        //     reactive: true,
+        //     width:this.tableWidth-20,
+        //     height:36,
+        //     layout_manager: new Clutter.TableLayout()
+        // });
+        // this.bottombar_table_layout = this.bottombar.layout_manager;
 
-        this.bottombarContainer.add_actor(this.bottombar,{x_fill:true,y_fill:true})
+        // this.bottombarContainer.add_actor(this.bottombar,{x_fill:true,y_fill:true})
 
-        this.veryBottomBarContainer = new St.Bin({ style_class: 'very-bottom-box-container',
-            reactive:true,
-            can_focus:true,
-            track_hover:true
-        });
+        // this.veryBottomBarContainer = new St.Bin({ style_class: 'very-bottom-box-container',
+        //     reactive:true,
+        //     can_focus:true,
+        //     track_hover:true
+        // });
 
-        this.veryBottomBar = new St.Widget({
-            style_class: 'very-bottom-box',
-            can_focus: true,
-            track_hover: true,
-            reactive: true,
-            width:this.tableWidth-20,
-            height:36,
-            layout_manager: new Clutter.TableLayout()
-        });
-        this.veryBottomBar_table_layout = this.veryBottomBar.layout_manager;
+        // this.veryBottomBar = new St.Widget({
+        //     style_class: 'very-bottom-box',
+        //     can_focus: true,
+        //     track_hover: true,
+        //     reactive: true,
+        //     width:this.tableWidth-20,
+        //     height:36,
+        //     layout_manager: new Clutter.TableLayout()
+        // });
+        // this.veryBottomBar_table_layout = this.veryBottomBar.layout_manager;
 
-        this.veryBottomBarContainer.add_actor(this.veryBottomBar,{x_fill:true,y_fill:true})
+        // this.veryBottomBarContainer.add_actor(this.veryBottomBar,{x_fill:true,y_fill:true})
 
-        let rowNum = 0;
-        let colNum = 0;
-        let maxPerRow = 4;
+        // let rowNum = 0;
+        // let colNum = 0;
+        // let maxPerRow = 4;
 
-        let gridSettingsButton = gridSettings[SETTINGS_GRID_SIZE];
+        // let gridSettingsButton = gridSettings[SETTINGS_GRID_SIZE];
 
-        for (var index=0; index<gridSettingsButton.length;index++) {
-            if (colNum>= 4) {
-                colNum = 0;
-                rowNum += 2;
-            }
+        // for (var index=0; index<gridSettingsButton.length;index++) {
+        //     if (colNum>= 4) {
+        //         colNum = 0;
+        //         rowNum += 2;
+        //     }
 
-            let button = gridSettingsButton[index];
-            button = new GridSettingsButton(button.text,button.cols,button.rows);
-            this.bottombar_table_layout.pack(button.actor, colNum, rowNum);
-            button.actor.connect('notify::hover',Lang.bind(this,this._onSettingsButton));
-            colNum++;
-        }
+        //     let button = gridSettingsButton[index];
+        //     button = new GridSettingsButton(button.text,button.cols,button.rows);
+        //     this.bottombar_table_layout.pack(button.actor, colNum, rowNum);
+        //     button.actor.connect('notify::hover',Lang.bind(this,this._onSettingsButton));
+        //     colNum++;
+        // }
 
         this.tableContainer = new  St.Bin({ style_class: 'table-container',
             reactive:true,
@@ -1002,8 +1004,8 @@ Grid.prototype = {
 
         this.actor.add_actor(this.topbar.actor,{x_fill:true});
         this.actor.add_actor(this.tableContainer,{x_fill:true});
-        this.actor.add_actor(this.bottombarContainer,{x_fill:true});
-        this.actor.add_actor(this.veryBottomBarContainer,{x_fill:true});
+        // this.actor.add_actor(this.bottombarContainer,{x_fill:true});
+        // this.actor.add_actor(this.veryBottomBarContainer,{x_fill:true});
 
 
         this.monitor = monitor;
@@ -1014,7 +1016,7 @@ Grid.prototype = {
 
         this.isEntered = false;
 
-        if (true) {
+        if (false) {
             let nbTotalSettings = 4;
 
             if (!toggleSettingListener) {

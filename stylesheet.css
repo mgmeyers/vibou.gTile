@@ -1,8 +1,8 @@
-*{
-z-index: 99;
+* {
+    z-index: 99;
 }
 
-.grid-title{
+.grid-title {
 	font-size: 12px;
     font-weight: bold;
     color: #ffffff;
@@ -10,16 +10,16 @@ z-index: 99;
     text-align:center;
 }
 
-.grid-panel{
-    background-color: rgba(10,10,10,0.7);
-    -webkit-filter: blur(2px);
+.grid-panel {
+    color: #5c616c;
+    border-image: url("images/bg.svg") 9 9 9 9;
     width:320px;
-    border-radius: 10px;
+    padding: 4px 3px;
 }
 
 .table-container
 {
-	
+	padding: 2px;
 }
 
 .table{
@@ -28,8 +28,9 @@ z-index: 99;
 }
 
 .table-element{
-    background-color: rgba(240,240,240,0.4);
+    background-color: rgba(255,255,255,0.4);
 	margin: 1px;
+    border-radius: 2px;
 }
 
 .table-element:activate
@@ -57,21 +58,25 @@ z-index: 99;
 
 .close-button-container
 {
-	background-color: rgba(0,120,255,0);
+    padding: 2px;
 }
 
 .close-button
 {
-    width:24px;
-    height:24px;
-    background-image: url("images/close_button.png");
+    width:20px;
+    height:20px;
+    background-image: url("images/close.svg");
+    background-size: 20px 20px;
 }
 
 .close-button:hover
 {
-    width:24px;
-    height:24px;
-    background-image: url("images/close_button_hover.png");
+    background-image: url("images/close-hover.svg");
+}
+
+.close-button:activate
+{
+    background-image: url("images/close-active.svg");
 }
 
 .top-box
@@ -172,24 +177,17 @@ z-index: 99;
 
 .bottom-box-container
 {
-
-	padding:10px 0px 0px 0px;
 }
 
 .bottom-box
 {
-	spacing-rows: 0px;
-	spacing-columns: 2px;
 }
 
 .very-bottom-box-container
 {
-	padding:2px 0px 10px 0px;
 }
 
 .very-bottom-box
 {
-    spacing-rows: 0px;
-	spacing-columns: 2px;
 }
 
