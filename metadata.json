@@ -5,8 +5,8 @@
     "3.16",
     "3.14"
   ],
-  "uuid": "gTile@vibou",
+  "uuid": "gTile@mgmeyers",
   "name": "gTile",
   "description": "Tile windows on a grid. It even supports multiscreen! (See README file for configuration)",
-  "url": "https://github.com/vibou/vibou.gTile"
+  "url": "https://github.com/mgmeyers/vibou.gTile"
 }
