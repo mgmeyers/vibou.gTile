@@ -114,8 +114,8 @@ function initSettings() {
     //Here is where you add new grid size button
     gridSettings[SETTINGS_GRID_SIZE] = [
         // new GridSettingsButton('4x4',4,4),
-        new GridSettingsButton('6x4',6,4),
-        // new GridSettingsButton('8x6',8,6),
+        // new GridSettingsButton('6x4',6,4),
+        new GridSettingsButton('8x6',8,6),
     ];
 
     //You can change those settings to set whatever you want by default
@@ -1252,12 +1252,12 @@ GridElementDelegate.prototype = {
             let areaWidth,areaHeight,areaX,areaY;
             [areaX,areaY,areaWidth,areaHeight] = this._computeAreaPositionSize(this.first,gridElement);
 
-            if (this._allSelected()) {
-                move_maximize_window(focusMetaWindow,areaX,areaY);
-            }
-            else {
-                move_resize_window_with_margins(focusMetaWindow,areaX,areaY,areaWidth,areaHeight);
-            }
+            // if (this._allSelected()) {
+            // move_maximize_window(focusMetaWindow,areaX,areaY);
+            // }
+            // else {
+            move_resize_window_with_margins(focusMetaWindow,areaX,areaY,areaWidth,areaHeight);
+            // }
             //focusMetaWindow.configure_notify();
 
             this._resizeDone();
